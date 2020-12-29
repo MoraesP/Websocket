@@ -8,10 +8,16 @@ import { WebSocketApiService } from "./web-socket-api.service";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = "websocket-front";
+  message: string;
+  topicSelected: string;
 
-  name: string;
-  user: "pedro";
+  messages = [];
+
+  isConnect = false;
+
+  topic1 = true;
+  topic2 = true;
+  topic3 = true;
 
   connection: Observable<any>;
   websocketStatusSubscription: Subscription;
@@ -23,10 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.webSocketApiService.disconnect();
-    if (this.websocketStatusSubscription) {
-      this.websocketStatusSubscription.unsubscribe();
-    }
+    this.disconnect();
   }
 
   connect() {
@@ -37,26 +40,38 @@ export class AppComponent implements OnInit, OnDestroy {
 
   disconnect() {
     this.webSocketApiService.disconnect();
+    this.getStatusConnection();
+    if (this.websocketStatusSubscription) {
+      this.websocketStatusSubscription.unsubscribe();
+    }
+  }
+
+  getStatusConnection() {
+    this.isConnect = this.webSocketApiService.status.connection === 1;
   }
 
   subscribeWS() {
     this.websocketStatusSubscription = this.webSocketApiService.status$.subscribe(
-      (_) => {
-        this.connection = this.webSocketApiService.onMessage(
-          "/topic/greetings"
-        );
-        this.connection.subscribe((message) => {
-          this.handleMessage(message);
-        });
-      }
+      (_) => {}
     );
   }
 
+  inscrever(topic: string) {
+    this.connection = this.webSocketApiService.onMessage("/topic/" + topic);
+    this.connection.subscribe((message) => {
+      this.handleMessage(message);
+    });
+  }
+
+  selectTopic(topic) {
+    this.topicSelected = topic;
+  }
+
   sendMessage() {
-    this.webSocketApiService.send("/topic/greetings", this.name);
+    this.webSocketApiService.send("/topic/" + this.topicSelected, this.message);
   }
 
   handleMessage(message) {
-    console.log(message);
+    this.messages.push(message);
   }
 }

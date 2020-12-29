@@ -1,34 +1,229 @@
-<div id="main-content" class="container">
+<div class="background">
+  <div class="center">
+    <form class="button-connect">
+      <div class="form-group">
+        <label>Conexão Websocket:</label>
+        <button
+          (click)="connect()"
+          type="button"
+          mdbBtn
+          color="success"
+          mdbWavesEffect
+          [disabled]="false"
+        >
+          CONECTAR
+        </button>
+        <button
+          (click)="disconnect()"
+          mdbBtn
+          type="button"
+          color="danger"
+          mdbWavesEffect
+          [disabled]="false"
+        >
+          DESCONECTAR
+        </button>
+      </div>
+    </form>
+    <div class="text-message">
+      <div *ngFor="let message of messages">
+        <label class="message">> {{ message }}</label>
+      </div>
+    </div>
+    <div class="topics">
+      <label><strong>Tópicos</strong></label>
+    </div>
+    <div class="topics-menu">
+      <button
+        (click)="inscrever('DESENHO'); topic1 = false"
+        mdbBtn
+        type="button"
+        gradient="peach"
+        rounded="true"
+        mdbWavesEffect
+      >
+        DESENHO
+      </button>
+      <button
+        (click)="inscrever('TECNOLOGIA'); topic2 = false"
+        mdbBtn
+        type="button"
+        gradient="peach"
+        rounded="true"
+        mdbWavesEffect
+      >
+        TECNOLOGIA
+      </button>
+      <button
+        (click)="inscrever('ENTRETENIMENTO'); topic3 = false"
+        mdbBtn
+        type="button"
+        gradient="peach"
+        rounded="true"
+        mdbWavesEffect
+      >
+        ENTRETENIMENTO
+      </button>
+    </div>
+    <div class="topics">
+      <label><strong>Tópicos inscritos</strong></label>
+    </div>
+    <div class="topics-menu">
+      <button
+        (click)="selectTopic('DESENHO')"
+        mdbBtn
+        type="button"
+        gradient="blue"
+        rounded="true"
+        mdbWavesEffect
+        [disabled]="topic1"
+      >
+        DESENHO
+      </button>
+      <button
+        (click)="selectTopic('TECNOLOGIA')"
+        mdbBtn
+        type="button"
+        gradient="blue"
+        rounded="true"
+        mdbWavesEffect
+        [disabled]="topic2"
+      >
+        TECNOLOGIA
+      </button>
+      <button
+        (click)="selectTopic('ENTRETENIMENTO')"
+        mdbBtn
+        type="button"
+        gradient="blue"
+        rounded="true"
+        mdbWavesEffect
+        [disabled]="topic3"
+      >
+        ENTRETENIMENTO
+      </button>
+    </div>
+    <form class="form-inline button-send">
+      <div class="form-group">
+        <label for="message">Mensagem: </label>
+        <input
+          type="text"
+          [(ngModel)]="message"
+          class="form-control"
+          name="message"
+        />
+        <br />
+        <button
+          (click)="sendMessage()"
+          mdbBtn
+          type="button"
+          gradient="peach"
+          rounded="true"
+          mdbWavesEffect
+          [disabled]="!message"
+        >
+          ENVIAR
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- <div id="main-content" class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <form class="form-inline">
         <div class="form-group">
-          <label for="connect">WebSocket Connection:</label>
-          <button (click)="connect()" class="btn btn-default" type="submit">
-            Connect
+          <label>Conexão Websocket:</label>
+          <button
+            (click)="connect()"
+            type="button"
+            mdbBtn
+            color="success"
+            mdbWavesEffect
+            [disabled]="false"
+          >
+            CONECTAR
           </button>
-          <button (click)="disconnect()" type="submit">Disconnect</button>
+          <button
+            (click)="disconnect()"
+            mdbBtn
+            type="button"
+            color="danger"
+            mdbWavesEffect
+            [disabled]="false"
+          >
+            DESCONECTAR
+          </button>
         </div>
       </form>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-12">
       <form class="form-inline">
         <div class="form-group">
-          <label for="name">What is your name?</label>
+          <label for="topic">Insira um tópico: </label>
           <input
             type="text"
-            [(ngModel)]="name"
+            [(ngModel)]="topic"
             class="form-control"
-            name="name"
+            name="topic"
           />
           <br />
-          <button (click)="sendMessage()" class="btn btn-default" type="submit">
-            Send
+          <button
+            (click)="inscrever(topic)"
+            mdbBtn
+            type="button"
+            gradient="peach"
+            rounded="true"
+            mdbWavesEffect
+            [disabled]="!topic"
+          >
+            INSCREVER
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-md-2">
+      <div *ngFor="let t of topics">
+        <button
+          mdbBtn
+          type="button"
+          color="warning"
+          outline="true"
+          mdbWavesEffect
+          (click)="selectTopic(t)"
+        >
+          {{ t }}
+        </button>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="message">Mensagem: </label>
+          <input
+            type="text"
+            [(ngModel)]="message"
+            class="form-control"
+            name="message"
+          />
+          <br />
+          <button
+            (click)="sendMessage()"
+            mdbBtn
+            type="button"
+            gradient="peach"
+            rounded="true"
+            mdbWavesEffect
+            [disabled]="!message"
+          >
+            ENVIAR
           </button>
         </div>
       </form>
     </div>
   </div>
-</div>
+</div> -->
 <router-outlet></router-outlet>

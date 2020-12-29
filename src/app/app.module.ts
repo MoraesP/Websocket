@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { WebSocketApiService } from './web-socket-api.service';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { WebSocketApiService } from './web-socket-api.service';
   imports: [
     BrowserModule,
     AppRoutingModule, 
-    FormsModule
+    FormsModule,
+    MDBBootstrapModule.forRoot(),
   ],
   providers: [WebSocketApiService],
   bootstrap: [AppComponent]
