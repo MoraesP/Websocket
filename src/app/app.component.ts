@@ -33,6 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   connect() {
+    this.messages.push("c o n e c t a n d o . . .");
     this.webSocketApiService.initializeStatus();
     this.webSocketApiService.connect();
     this.subscribeWS();
@@ -52,7 +53,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   subscribeWS() {
     this.websocketStatusSubscription = this.webSocketApiService.status$.subscribe(
-      (_) => {}
+      (status) => {
+        if (status.connection === 1) {
+          this.messages.push("c o n e c t a d o");
+        }
+      }
     );
   }
 

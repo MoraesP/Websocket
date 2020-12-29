@@ -73,8 +73,7 @@
         (click)="selectTopic('DESENHO')"
         mdbBtn
         type="button"
-        gradient="blue"
-        rounded="true"
+        color="{{ topicSelected === 'DESENHO' ? 'success' : 'default' }}"
         mdbWavesEffect
         [disabled]="topic1"
       >
@@ -84,8 +83,7 @@
         (click)="selectTopic('TECNOLOGIA')"
         mdbBtn
         type="button"
-        gradient="blue"
-        rounded="true"
+        color="{{ topicSelected === 'TECNOLOGIA' ? 'success' : 'default' }}"
         mdbWavesEffect
         [disabled]="topic2"
       >
@@ -95,8 +93,7 @@
         (click)="selectTopic('ENTRETENIMENTO')"
         mdbBtn
         type="button"
-        gradient="blue"
-        rounded="true"
+        color="{{ topicSelected === 'ENTRETENIMENTO' ? 'success' : 'default' }}"
         mdbWavesEffect
         [disabled]="topic3"
       >
